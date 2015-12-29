@@ -2,6 +2,7 @@
 *.pyo
 *.
 *.sublime-workspace
+*.egg-info
 .DS_Store
 .coverage
 local_settings.py

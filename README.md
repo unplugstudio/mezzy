@@ -14,6 +14,12 @@ nested inlines. It also contains some helpers for templates.
 **`mezzy.management`** contains helper management commands (like `gruntserver`,
 to start Grunt when you start `runserver`).
 
+Among other template tags provided my Mezzy, the `clean` filter is made to
+remove unwanted HTML tags and attributes that aren't allowed for Mezzanine by
+default. This is useful when you have a `RichTextField` and you need its
+content without videos, iframes, flash, etc.
+
+
 ## Install
 
 1. Install via pip: `pip install mezzy`.

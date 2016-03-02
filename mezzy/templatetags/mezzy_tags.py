@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+import bleach
+
 from django.core.exceptions import ImproperlyConfigured
 
 from mezzanine import template
@@ -46,3 +48,17 @@ def load_theme():
     theme = SiteConfiguration.objects.get_or_create(site_id=site)[0]
     request.theme = theme
     return theme
+
+
+@register.filter
+def clean(value):
+    """
+    Removes HTML tags and attributes that aren't allowed
+    for Mezzanine by default.
+    """
+    tags = settings.RICHTEXT_ALLOWED_TAGS
+    attrs = settings.RICHTEXT_ALLOWED_ATTRIBUTES
+    styles = settings.RICHTEXT_ALLOWED_STYLES
+    return bleach.clean(
+        value, tags=tags, attributes=attrs, strip=True,
+        strip_comments=True, styles=styles)

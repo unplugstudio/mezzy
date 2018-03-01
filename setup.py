@@ -7,7 +7,7 @@ from mezzy import __version__
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
@@ -25,12 +25,11 @@ setup(
         'Topic :: Software Development :: Libraries',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
-        # 'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        # 'Programming Language :: Python :: 3',
-        # 'Programming Language :: Python :: 3.2',
-        # 'Programming Language :: Python :: 3.3',
-        # 'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     keywords='django mezzanine utility helper',
     packages=find_packages(),

@@ -15,5 +15,12 @@ Install
 -------
 
 1. Install via pip: ``pip install mezzy``.
-2. Add to ``mezzy`` your ``INSTALLED_APPS``.
+2. Add ``mezzy`` your ``INSTALLED_APPS``.
 3. Use the parts you want.
+
+Contributing
+------------
+
+Review contribution guidelines at CONTRIBUTING.md_.
+
+.. _CONTRIBUTING.md: CONTRIBUTING.md

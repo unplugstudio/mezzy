@@ -20,6 +20,28 @@ Tests will also be run automatically when you add commits to your pull request.
 
 Please use the [Angular commit format] in your pull requests. This keeps the commit history relevant and human-readable, and generates very nice and useful changelogs.
 
+### Commit format
+
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+### Valid types
+
+- **feat**: A new feature
+- **fix**: A bug fix
+- **docs**: Documentation only changes
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **perf**: A code change that improves performance
+- **test**: Adding missing or correcting existing tests
+- **chore**: Changes to the build process or auxiliary tools and libraries such as documentation generation
+
+
 ## Publishing to PyPI
 
 This is intended for project maintainers with publish access to PyPI. As a contributor you won't be required to do this.

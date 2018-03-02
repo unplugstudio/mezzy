@@ -36,4 +36,4 @@ flake8:
 readme:
   image: python:3.6
   stage: test
-  script: tox -e docs
+  script: tox -e readme

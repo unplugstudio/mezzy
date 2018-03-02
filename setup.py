@@ -15,9 +15,9 @@ setup(
     version=__version__,
     description="Useful utilities for Mezzanine projects",
     long_description=long_description,
-    url="https://gitlab.com/tigris-webdev/mezzy",
+    url="https://gitlab.com/unplugstudio/mezzy",
     author="Ed Rivas",
-    author_email="e@jerivas.com",
+    author_email="ed@unplug.studio",
     license="MIT",
     classifiers=[
         "Development Status :: 5 - Production/Stable",

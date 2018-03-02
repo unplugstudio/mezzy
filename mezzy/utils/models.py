@@ -8,10 +8,10 @@ from mezzanine.core.models import Slugged, Orderable
 
 @python_2_unicode_compatible
 class Titled(models.Model):
-    '''
-    Simple titled model.
-    '''
-    title = models.CharField('Title', max_length=100)
+    """
+    Inline model with a title.
+    """
+    title = models.CharField("Title", max_length=100)
 
     class Meta:
         abstract = True
@@ -21,16 +21,16 @@ class Titled(models.Model):
 
 
 class TitledInline(Orderable, Titled):
-    '''
-    Simple inline with a title and manual sorting.
-    '''
+    """
+    Inline model with a title and manual sorting.
+    """
     class Meta:
         abstract = True
 
 
 class SluggedInline(Orderable, Slugged):
-    '''
-    Simple inline with a title, a slug and manual sorting.
-    '''
+    """
+    Inline model with a title, a slug and manual sorting.
+    """
     class Meta:
         abstract = True

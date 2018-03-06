@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from __future__ import print_function
 
 import os
@@ -27,6 +29,15 @@ if sys.argv[:2] == ["setup.py", "bump"]:
     os.system("conventional-changelog -p angular -i CHANGELOG.md -s")
     os.remove("package.json")
     sys.exit()
+
+# Tag and release the package to PyPI
+if sys.argv[:2] == ["setup.py", "release"]:
+    os.system("git tag v%s" % __version__)
+    os.system("git push && git push --tags")
+    os.system("rm -rf dist/")
+    os.system("./setup.py sdist")
+    os.system("./setup.py bdist_wheel")
+    os.system("twine upload dist/*")
 
 setup(
     name="mezzy",

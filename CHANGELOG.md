@@ -1,3 +1,13 @@
+<a name="2.1.1"></a>
+## [2.1.1](https://gitlab.com/unplugstudio/mezzy/compare/v2.1.0...v2.1.1) (2018-03-06)
+
+
+### Bug Fixes
+
+* make sure user.is_authenticated is a callable ([6a53814](https://gitlab.com/unplugstudio/mezzy/commit/6a53814))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://gitlab.com/unplugstudio/mezzy/compare/v2.0.0...v2.1.0) (2018-03-06)
 

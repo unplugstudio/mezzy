@@ -1,14 +1,32 @@
+from __future__ import print_function
+
+import os
+import sys
+
 from setuptools import setup, find_packages
 from codecs import open
-from os import path
 
 from mezzy import __version__
 
-here = path.abspath(path.dirname(__file__))
-
 # Get the long description from the README file
-with open(path.join(here, "README.rst"), encoding="utf-8") as f:
+with open("README.rst", encoding="utf-8") as f:
     long_description = f.read()
+
+# Bump version and generate CHANGELOG
+# npm install -g conventional-changelog-cli
+if sys.argv[:2] == ["setup.py", "bump"]:
+    try:
+        version = sys.argv[2]
+    except IndexError:
+        print("Please provide a version number in the format X.X.X")
+        sys.exit(1)
+    with open("mezzy/__init__.py", "w") as f:
+        f.write('__version__ = "%s"\n' % version)
+    with open("package.json", "w") as f:
+        f.write('{ "version": "%s" }' % version)
+    os.system("conventional-changelog -p angular -i CHANGELOG.md -s")
+    os.remove("package.json")
+    sys.exit()
 
 setup(
     name="mezzy",

@@ -3,6 +3,7 @@
 from __future__ import print_function
 
 import os
+import subprocess
 import sys
 
 from setuptools import setup, find_packages
@@ -26,18 +27,20 @@ if sys.argv[:2] == ["setup.py", "bump"]:
         f.write('__version__ = "%s"\n' % version)
     with open("package.json", "w") as f:
         f.write('{ "version": "%s" }' % version)
-    os.system("conventional-changelog -p angular -i CHANGELOG.md -s")
+    subprocess.call("conventional-changelog -p angular -i CHANGELOG.md -s")
     os.remove("package.json")
+    subprocess.call("git commit -am 'chore: version bump to %s'" % version)
     sys.exit()
 
 # Tag and release the package to PyPI
 if sys.argv[:2] == ["setup.py", "release"]:
-    os.system("git tag v%s" % __version__)
-    os.system("git push && git push --tags")
-    os.system("rm -rf dist/")
-    os.system("./setup.py sdist")
-    os.system("./setup.py bdist_wheel")
-    os.system("twine upload dist/*")
+    subprocess.call("git tag v%s" % __version__)
+    subprocess.call("git push && git push --tags")
+    subprocess.call("rm -rf dist/")
+    subprocess.call("python setup.py sdist")
+    subprocess.call("python setup.py bdist_wheel")
+    subprocess.call("twine upload dist/*")
+    sys.exit()
 
 setup(
     name="mezzy",

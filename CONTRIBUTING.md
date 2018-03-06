@@ -49,7 +49,7 @@ This is intended for project maintainers with publish access to PyPI. As a contr
 ```bash
 rm -rf dist/
 python setup.py sdist
-python setup.py bdist_wheel --universal
+python setup.py bdist_wheel
 twine upload dist/*
 ```
 

@@ -1,9 +1,10 @@
-<a name="2.10.0"></a>
-## 2.10.0 (2018-03-06)
+<a name="2.1.0"></a>
+# [2.1.0](https://gitlab.com/unplugstudio/mezzy/compare/v2.0.0...v2.1.0) (2018-03-06)
 
-* feat: add ViewTestMixin ([acf5735](https://gitlab.com/unplugstudio/mezzy/commit/acf5735))
-* docs: add contribution guide and CoC ([364954c](https://gitlab.com/unplugstudio/mezzy/commit/364954c))
-* docs: expand commit guidelines ([d1c6e25](https://gitlab.com/unplugstudio/mezzy/commit/d1c6e25))
+
+### Features
+
+* add ViewTestMixin ([acf5735](https://gitlab.com/unplugstudio/mezzy/commit/acf5735))
 
 
 

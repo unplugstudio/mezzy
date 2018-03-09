@@ -1,3 +1,13 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://gitlab.com/unplugstudio/mezzy/compare/v2.1.1...v2.2.0) (2018-03-09)
+
+
+### Features
+
+* add import_view helper ([7377287](https://gitlab.com/unplugstudio/mezzy/commit/7377287))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://gitlab.com/unplugstudio/mezzy/compare/v2.1.0...v2.1.1) (2018-03-06)
 

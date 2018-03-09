@@ -27,9 +27,9 @@ if sys.argv[:2] == ["setup.py", "bump"]:
         f.write('__version__ = "%s"\n' % version)
     with open("package.json", "w") as f:
         f.write('{ "version": "%s" }' % version)
-    subprocess.call("conventional-changelog -p angular -i CHANGELOG.md -s")
+    subprocess.call("conventional-changelog -p angular -i CHANGELOG.md -s", shell=True)
     os.remove("package.json")
-    subprocess.call("git commit -am 'chore: version bump to %s'" % version)
+    subprocess.call("git commit -am \"chore: bump version to %s\"" % version)
     sys.exit()
 
 # Tag and release the package to PyPI

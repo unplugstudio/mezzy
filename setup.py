@@ -35,7 +35,8 @@ if sys.argv[:2] == ["setup.py", "bump"]:
 # Tag and release the package to PyPI
 if sys.argv[:2] == ["setup.py", "release"]:
     subprocess.call("git tag v%s" % __version__)
-    subprocess.call("git push && git push --tags")
+    subprocess.call("git push")
+    subprocess.call("git push --tags")
     subprocess.call("rm -rf dist/")
     subprocess.call("python setup.py sdist")
     subprocess.call("python setup.py bdist_wheel")

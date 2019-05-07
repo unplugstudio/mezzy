@@ -2,9 +2,9 @@ from __future__ import unicode_literals
 
 import bleach
 
+from django import template
 from django.core.exceptions import ImproperlyConfigured
 
-from mezzanine import template
 from mezzanine.conf import settings
 
 register = template.Library()
@@ -26,7 +26,7 @@ def microtemplate(value):
     return value
 
 
-@register.as_tag
+@register.assignment_tag
 def load_theme():
     """
     Adds the `SiteConfiguration` to the context.

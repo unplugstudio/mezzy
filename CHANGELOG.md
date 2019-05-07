@@ -1,3 +1,13 @@
+<a name="2.3.0"></a>
+# [2.3.0](https://gitlab.com/unplugstudio/mezzy/compare/v2.2.0...v2.3.0) (2019-05-07)
+
+
+### Bug Fixes
+
+* allow calling templatetags as Python funcs ([6eead6e](https://gitlab.com/unplugstudio/mezzy/commit/6eead6e))
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://gitlab.com/unplugstudio/mezzy/compare/v2.1.1...v2.2.0) (2018-03-09)
 

@@ -1,3 +1,13 @@
+<a name="2.4.0"></a>
+# [2.4.0](https://gitlab.com/unplugstudio/mezzy/compare/v2.3.0...v2.4.0) (2019-05-16)
+
+
+### Features
+
+* add mezzy_calendar_tags ([dfebf3f](https://gitlab.com/unplugstudio/mezzy/commit/dfebf3f))
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://gitlab.com/unplugstudio/mezzy/compare/v2.2.0...v2.3.0) (2019-05-07)
 

@@ -4,6 +4,7 @@ from django.contrib import admin, messages
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseRedirect
 from django.utils.encoding import force_text
+from django.utils.html import format_html
 
 from mezzanine.core.admin import TabularDynamicInlineAdmin
 from mezzanine.utils.urls import admin_url
@@ -37,7 +38,7 @@ class LinkedAdminMixin(admin.ModelAdmin):
         """
         return False
 
-    def in_menu(self):
+    def has_module_permission(self, request):
         """
         Hides this admin class from the menu as this will only be accessible via the
         parent model.
@@ -73,8 +74,7 @@ class LinkedAdminMixin(admin.ModelAdmin):
         parent = getattr(obj, self.parent_field)
         parent_class = parent._meta.verbose_name.title()
         url = admin_url(parent.__class__, "change", parent.pk)
-        return "%s: <a href='%s'>%s</a>" % (parent_class, url, parent)
-    get_parent_link.allow_tags = True
+        return format_html("{}: <a href='{}'>{}</a>", parent_class, url, parent)
     get_parent_link.short_description = "Parent element"
 
 
@@ -92,9 +92,8 @@ class LinkedInlineMixin(TabularDynamicInlineAdmin):
         if obj.id:
             txt = getattr(self, "link_text", "Edit")
             url = admin_url(obj.__class__, "change", obj.id)
-            return "<a href='%s'>%s</a>" % (url, txt)
+            return format_html("<a href='{}'>{}</a>", url, txt)
         return ""
-    get_edit_link.allow_tags = True
     get_edit_link.short_description = ""
 
     def get_related_count(self, obj):

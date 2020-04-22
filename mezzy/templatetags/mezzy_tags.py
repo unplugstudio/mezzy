@@ -26,7 +26,7 @@ def microtemplate(value):
     return value
 
 
-@register.assignment_tag
+@register.simple_tag
 def load_theme():
     """
     Adds the `SiteConfiguration` to the context.

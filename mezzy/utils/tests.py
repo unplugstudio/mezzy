@@ -41,10 +41,9 @@ class ViewTestMixin(object):
         self.middleware.process_request(request)
         request.session.save()
 
-        try:
+        if hasattr(cls_or_func, "as_view"):
             return cls_or_func.as_view()(request, *args, **kwargs)
-        except AttributeError:
-            return cls_or_func(request, *args, **kwargs)
+        return cls_or_func(request, *args, **kwargs)
 
     def get(self, cls_or_func, *args, **kwargs):
         return self.execute("get", cls_or_func, *args, **kwargs)

@@ -5,6 +5,7 @@
 *.egg-info
 .DS_Store
 .coverage
+.vscode
 local_settings.py
 /.eggs
 /.tox

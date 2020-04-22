@@ -32,4 +32,4 @@ def annotate_start_dts(events, after_date=None):
     """
     for event in list(events):
         event.next_start_dt = next_start_dt(event, after_date)
-    return sorted(events, key=attrgetter('next_start_dt.day'))
+    return sorted(events, key=attrgetter("next_start_dt.day"))

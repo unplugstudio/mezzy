@@ -6,7 +6,7 @@ from django import VERSION
 from django.utils.decorators import method_decorator as django_method_decorator
 
 
-def method_decorator_backport(decorator, name=''):
+def method_decorator_backport(decorator, name=""):
     """
     Backport of django.utils.decorators.method_decorator from Django 1.11.
     Allows decorating classes directly, instead of having to redefine the method.
@@ -30,9 +30,7 @@ def method_decorator_backport(decorator, name=''):
             else:
                 raise ValueError(
                     "The keyword argument `name` must be the name of a method "
-                    "of the decorated class: {0}. Got '{1}' instead".format(
-                        obj, name,
-                    )
+                    "of the decorated class: {0}. Got '{1}' instead".format(obj, name)
                 )
         else:
             func = obj
@@ -43,7 +41,7 @@ def method_decorator_backport(decorator, name=''):
             functions are applied so that the call order is the same as the
             order in which they appear in the iterable.
             """
-            if hasattr(decorator, '__iter__'):
+            if hasattr(decorator, "__iter__"):
                 for dec in decorator[::-1]:
                     function = dec(function)
                 return function
@@ -53,10 +51,12 @@ def method_decorator_backport(decorator, name=''):
             @decorate
             def bound_func(*args2, **kwargs2):
                 return func.__get__(self, type(self))(*args2, **kwargs2)
+
             # bound_func has the signature that 'decorator' expects i.e.  no
             # 'self' argument, but it is a closure over self so it can call
             # 'func' correctly.
             return bound_func(*args, **kwargs)
+
         # In case 'decorator' adds attributes to the function it decorates, we
         # want to copy those. We don't have access to bound_func in this scope,
         # but we can cheat by using it on a dummy function.
@@ -64,6 +64,7 @@ def method_decorator_backport(decorator, name=''):
         @decorate
         def dummy(*args, **kwargs):
             pass
+
         update_wrapper(_wrapper, dummy)
         # Need to preserve any existing attributes of 'func', including the name.
         update_wrapper(_wrapper, func)
@@ -73,15 +74,18 @@ def method_decorator_backport(decorator, name=''):
             return obj
 
         return _wrapper
+
     # Don't worry about making _dec look similar to a list/tuple as it's rather
     # meaningless.
-    if not hasattr(decorator, '__iter__'):
+    if not hasattr(decorator, "__iter__"):
         update_wrapper(_dec, decorator, assigned=available_attrs(decorator))
     # Change the name to aid debugging.
-    if hasattr(decorator, '__name__'):
-        _dec.__name__ = ('method_decorator(%s)' % decorator.__name__).encode('utf-8')
+    if hasattr(decorator, "__name__"):
+        _dec.__name__ = ("method_decorator(%s)" % decorator.__name__).encode("utf-8")
     else:
-        _dec.__name__ = ('method_decorator(%s)' % decorator.__class__.__name__).encode('utf-8')
+        _dec.__name__ = ("method_decorator(%s)" % decorator.__class__.__name__).encode(
+            "utf-8"
+        )
     return _dec
 
 

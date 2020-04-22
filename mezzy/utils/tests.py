@@ -63,5 +63,7 @@ class ViewTestMixin(object):
     def assertLoginRequired(self, cls_or_func, *args, **kwargs):
         response = self.get(cls_or_func, *args, **kwargs)
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response["location"].startswith("%s?next=" % settings.LOGIN_URL))
+        self.assertTrue(
+            response["location"].startswith("%s?next=" % settings.LOGIN_URL)
+        )
         return response

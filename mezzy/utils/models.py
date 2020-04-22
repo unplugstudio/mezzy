@@ -11,6 +11,7 @@ class Titled(models.Model):
     """
     Inline model with a title.
     """
+
     title = models.CharField("Title", max_length=100)
 
     class Meta:
@@ -24,6 +25,7 @@ class TitledInline(Orderable, Titled):
     """
     Inline model with a title and manual sorting.
     """
+
     class Meta:
         abstract = True
 
@@ -32,5 +34,6 @@ class SluggedInline(Orderable, Slugged):
     """
     Inline model with a title, a slug and manual sorting.
     """
+
     class Meta:
         abstract = True

@@ -7,6 +7,7 @@ class UXFormMixin(Html5Mixin):
     """
     Form tweaks for a better user experience.
     """
+
     def __init__(self, *args, **kwargs):
         super(UXFormMixin, self).__init__(*args, **kwargs)
 

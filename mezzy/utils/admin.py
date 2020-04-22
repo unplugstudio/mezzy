@@ -15,6 +15,7 @@ class LinkedAdminMixin(admin.ModelAdmin):
     Admin mixin class for models that are edited only via links in a parent model.
     Links can be generated with the LinkedInlineMixin class.
     """
+
     readonly_fields = ["get_parent_link"]
 
     def __init__(self, *args, **kwargs):
@@ -24,7 +25,8 @@ class LinkedAdminMixin(admin.ModelAdmin):
         super(LinkedAdminMixin, self).__init__(*args, **kwargs)
         if not hasattr(self, "parent_field"):
             raise ImproperlyConfigured(
-                "You must define a 'parent_field' attribute to use LinkedAdminMixin.")
+                "You must define a 'parent_field' attribute to use LinkedAdminMixin."
+            )
 
     def has_add_permission(self, request):
         """
@@ -54,8 +56,10 @@ class LinkedAdminMixin(admin.ModelAdmin):
 
         # Stay in the same page if the user clicks "Save and continue editing"
         if "_continue" in request.POST:
-            msg = "The %(name)s '%(obj)s' was changed successfully. You may edit it " \
+            msg = (
+                "The %(name)s '%(obj)s' was changed successfully. You may edit it "
                 "again below." % msg_dict
+            )
             redirect_url = request.path
 
         # Redirect to the parent model otherwise
@@ -75,6 +79,7 @@ class LinkedAdminMixin(admin.ModelAdmin):
         parent_class = parent._meta.verbose_name.title()
         url = admin_url(parent.__class__, "change", parent.pk)
         return format_html("{}: <a href='{}'>{}</a>", parent_class, url, parent)
+
     get_parent_link.short_description = "Parent element"
 
 
@@ -82,6 +87,7 @@ class LinkedInlineMixin(TabularDynamicInlineAdmin):
     """
     Simple mixin to add a link to edit a related child model.
     """
+
     fields = ["title", "get_related_count", "get_edit_link", "_order"]
     readonly_fields = ["get_edit_link", "get_related_count"]
 
@@ -94,6 +100,7 @@ class LinkedInlineMixin(TabularDynamicInlineAdmin):
             url = admin_url(obj.__class__, "change", obj.id)
             return format_html("<a href='{}'>{}</a>", url, txt)
         return ""
+
     get_edit_link.short_description = ""
 
     def get_related_count(self, obj):
@@ -106,4 +113,5 @@ class LinkedInlineMixin(TabularDynamicInlineAdmin):
             # Sample output: 5 foobars
             return "%s %s" % (rel_field.count(), rel_name)
         return ""
+
     get_related_count.short_description = ""

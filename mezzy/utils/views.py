@@ -14,12 +14,14 @@ from django.utils.translation import ugettext_lazy as _
 # Form Messages #
 #################
 
+
 class FormSuccessMessageMixin(object):
     """
     Add a message when form validation succeeds (requires the message framework).
     Notice that this mixin will handle both single and multi-form views,
     like the ones provided by django-extra-views.
     """
+
     success_message = _("All changes have been saved successfully.")
 
     def get_success_message(self, form=None, inlines=None):
@@ -52,6 +54,7 @@ class FormErrorMessageMixin(object):
     Notice that this mixin will handle both single and multi-form views,
     like the ones provided by django-extra-views.
     """
+
     error_message = _("Please correct the errors below.")
 
     def get_error_message(self, form=None, inlines=None):
@@ -84,6 +87,7 @@ class FormMessagesMixin(FormSuccessMessageMixin, FormErrorMessageMixin):
     Notice that this mixin will handle both single and multi-form views,
     like the ones provided by django-extra-views.
     """
+
     pass
 
 
@@ -91,13 +95,15 @@ class FormMessagesMixin(FormSuccessMessageMixin, FormErrorMessageMixin):
 # Access Mixins (backported from Django 1.11) #
 ###############################################
 
+
 class AccessMixin(object):
     """
     Abstract CBV mixin that gives access mixins the same customizable
     functionality.
     """
+
     login_url = None
-    permission_denied_message = ''
+    permission_denied_message = ""
     raise_exception = False
     redirect_field_name = REDIRECT_FIELD_NAME
 
@@ -108,8 +114,8 @@ class AccessMixin(object):
         login_url = self.login_url or settings.LOGIN_URL
         if not login_url:
             raise ImproperlyConfigured(
-                '{0} is missing the login_url attribute. Define {0}.login_url, settings.LOGIN_URL, or override '  # noqa
-                '{0}.get_login_url().'.format(self.__class__.__name__)
+                "{0} is missing the login_url attribute. Define {0}.login_url, settings.LOGIN_URL, or override "  # noqa
+                "{0}.get_login_url().".format(self.__class__.__name__)
             )
         return force_text(login_url)
 
@@ -128,13 +134,18 @@ class AccessMixin(object):
     def handle_no_permission(self):
         if self.raise_exception:
             raise PermissionDenied(self.get_permission_denied_message())
-        return redirect_to_login(self.request.get_full_path(), self.get_login_url(), self.get_redirect_field_name())  # noqa
+        return redirect_to_login(
+            self.request.get_full_path(),
+            self.get_login_url(),
+            self.get_redirect_field_name(),
+        )  # noqa
 
 
 class LoginRequiredMixin(AccessMixin):
     """
     CBV mixin which verifies that the current user is authenticated.
     """
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
             return self.handle_no_permission()
@@ -146,6 +157,7 @@ class PermissionRequiredMixin(AccessMixin):
     CBV mixin which verifies that the current user has all specified
     permissions.
     """
+
     permission_required = None
 
     def get_permission_required(self):
@@ -155,11 +167,11 @@ class PermissionRequiredMixin(AccessMixin):
         """
         if self.permission_required is None:
             raise ImproperlyConfigured(
-                '{0} is missing the permission_required attribute. Define {0}.permission_required, or override '  # noqa
-                '{0}.get_permission_required().'.format(self.__class__.__name__)
+                "{0} is missing the permission_required attribute. Define {0}.permission_required, or override "  # noqa
+                "{0}.get_permission_required().".format(self.__class__.__name__)
             )
         if isinstance(self.permission_required, six.string_types):
-            perms = (self.permission_required, )
+            perms = (self.permission_required,)
         else:
             perms = self.permission_required
         return perms
@@ -185,7 +197,9 @@ class UserPassesTestMixin(AccessMixin):
 
     def test_func(self):
         raise NotImplementedError(
-            '{0} is missing the implementation of the test_func() method.'.format(self.__class__.__name__)  # noqa
+            "{0} is missing the implementation of the test_func() method.".format(
+                self.__class__.__name__
+            )  # noqa
         )
 
     def get_test_func(self):

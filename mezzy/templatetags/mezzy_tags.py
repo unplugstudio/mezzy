@@ -33,12 +33,14 @@ def load_theme():
     It also uses the request object as cache to avoid some DB hits.
     """
     from mezzanine.core.request import current_request
+
     try:
         from theme.models import SiteConfiguration
     except ImportError:
         raise ImproperlyConfigured(
             "You must create a SiteConfiguration model inside the theme app to use the "
-            "load_theme tag.")
+            "load_theme tag."
+        )
 
     request = current_request()
     if hasattr(request, "theme"):

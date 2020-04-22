@@ -13,7 +13,7 @@ register = template.Library()
 @register.filter
 def microtemplate(value):
     """
-    A simple template filter that parses certain variables in the value param.
+    Filter that parses certain variables in the value param.
     It can be used to allow some templating capabilities in admin fields.
     Default template tokens can be found in mezzy.defaults.
     """
@@ -54,7 +54,7 @@ def load_theme():
 def clean(value):
     """
     Removes HTML tags and attributes that aren't allowed
-    for Mezzanine by default.
+    for Mezzanine by default, even if the user has disabled filtering.
     """
     kwargs = {
         "tags": settings.RICHTEXT_ALLOWED_TAGS,

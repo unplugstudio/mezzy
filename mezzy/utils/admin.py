@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import admin, messages
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseRedirect
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import format_html
 
 from mezzanine.core.admin import TabularDynamicInlineAdmin
@@ -52,7 +52,7 @@ class LinkedAdminMixin(admin.ModelAdmin):
         Return to the parent model instead of showing the change list view.
         """
         opts = self.model._meta
-        msg_dict = {"name": force_text(opts.verbose_name), "obj": force_text(obj)}
+        msg_dict = {"name": force_str(opts.verbose_name), "obj": force_str(obj)}
 
         # Stay in the same page if the user clicks "Save and continue editing"
         if "_continue" in request.POST:
@@ -71,6 +71,9 @@ class LinkedAdminMixin(admin.ModelAdmin):
         self.message_user(request, msg, messages.SUCCESS)
         return HttpResponseRedirect(redirect_url)
 
+    @admin.display(
+        description="Parent element"
+    )
     def get_parent_link(self, obj):
         """
         Render a link to quickly jump to the parent model instance.
@@ -80,7 +83,6 @@ class LinkedAdminMixin(admin.ModelAdmin):
         url = admin_url(parent.__class__, "change", parent.pk)
         return format_html("{}: <a href='{}'>{}</a>", parent_class, url, parent)
 
-    get_parent_link.short_description = "Parent element"
 
 
 class LinkedInlineMixin(TabularDynamicInlineAdmin):
@@ -91,6 +93,9 @@ class LinkedInlineMixin(TabularDynamicInlineAdmin):
     fields = ["title", "get_related_count", "get_edit_link", "_order"]
     readonly_fields = ["get_edit_link", "get_related_count"]
 
+    @admin.display(
+        description=""
+    )
     def get_edit_link(self, obj):
         """
         Display a link to edit the related admin element.
@@ -101,8 +106,10 @@ class LinkedInlineMixin(TabularDynamicInlineAdmin):
             return format_html("<a href='{}'>{}</a>", url, txt)
         return ""
 
-    get_edit_link.short_description = ""
 
+    @admin.display(
+        description=""
+    )
     def get_related_count(self, obj):
         """
         Display how many related objects are available in the linked model.
@@ -114,4 +121,3 @@ class LinkedInlineMixin(TabularDynamicInlineAdmin):
             return "%s %s" % (rel_field.count(), rel_name)
         return ""
 
-    get_related_count.short_description = ""

@@ -6,8 +6,8 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.utils import six
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.translation import gettext_lazy as _
 
 
 #################
@@ -117,7 +117,7 @@ class AccessMixin(object):
                 "{0} is missing the login_url attribute. Define {0}.login_url, settings.LOGIN_URL, or override "  # noqa
                 "{0}.get_login_url().".format(self.__class__.__name__)
             )
-        return force_text(login_url)
+        return force_str(login_url)
 
     def get_permission_denied_message(self):
         """
